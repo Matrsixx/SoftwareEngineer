@@ -24,8 +24,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
-
-.register-box {
+.login-box {
 	width: 350px;
 	background:white;
 	padding: 40px;
@@ -33,7 +32,7 @@ body {
 	box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-.register-box h2 {
+.login-box h2 {
 	text-align: center;
 	margin-bottom: 20px;
 	color: black;
@@ -74,9 +73,9 @@ body {
 	font-size: 12px;
 }
 
-a {
+#button {
 	display: inline-block;
-	background: gray;
+	background: chocolate;
 	color: #fff;
 	padding: 10px 20px;
 	font-size: 16px;
@@ -86,7 +85,16 @@ a {
 	transition: 0.5s;
 }
 
-a:hover {
+#button:hover {
 	background: #fff;
-	color: gray;
+	color: chocolate;
+}
+
+.forgot-button{
+	text-decoration: none;
+	color: brown;
+}
+
+.forgot-button:hover{
+	text-decoration: underline;
 }

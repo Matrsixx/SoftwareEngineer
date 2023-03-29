@@ -73,7 +73,7 @@ body {
 	font-size: 12px;
 }
 
-a {
+#button {
 	display: inline-block;
 	background: gray;
 	color: #fff;
@@ -85,7 +85,16 @@ a {
 	transition: 0.5s;
 }
 
-a:hover {
+#button:hover {
 	background: #fff;
 	color: gray;
+}
+
+.forgot-button{
+	text-decoration: none;
+	color: black;
+}
+
+.forgot-button:hover{
+	text-decoration: underline;
 }

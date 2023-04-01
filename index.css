@@ -83,6 +83,7 @@ body {
 	text-decoration: none;
 	border-radius: 5px;
 	transition: 0.5s;
+	border-color: chocolate;
 }
 
 #button:hover {
@@ -97,4 +98,8 @@ body {
 
 .forgot-button:hover{
 	text-decoration: underline;
+}
+
+.errortext{
+	color: red;
 }

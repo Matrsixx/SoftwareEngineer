@@ -18,6 +18,11 @@
 					session_start();
 					$username = $_POST['username'];
 					$password = $_POST['password'];
+
+					$hash = "$2y$10$";
+                    $salt = "iusesomecrazystrings22";
+                    $combine = $hash . $salt;
+                    $password = crypt($password, $combine);
 					$data1_id = ' ';
 					$data1_username = '';
 					$data1_password = '';
@@ -39,7 +44,7 @@
 						$_SESSION['email'] = $data1_email;
 						$_SESSION['password'] = $data1_password;
 							 
-						header("Location: Home.html");
+						header("Location: Home.php");
 					}else{
 						$error123 = "Wrong username or password";
 					}
@@ -59,9 +64,9 @@
 			<br>
 			<input id="button" type="submit" value="submit" name="submit">
 			<br><br>
-			<a href="forgot-password.html" class="forgot-button"><b>Forgot Password?</b></a>
+			<a href="forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a>
 			<br><br>
-			<span>Dont Have An Account? <a href="RegisterPage.html" class="forgot-button"><b>Register</b></a></span>
+			<span>Dont Have An Account? <a href="RegisterPage.php" class="forgot-button"><b>Register</b></a></span>
 			
 		</form>
 	</div>

@@ -16,7 +16,7 @@
       <nav>
         <ul>
           <li><a href="Home.php">Home</a></li>
-          <li><a href="#">History</a></li>
+          <li><a href="./Transaction.php">Transaction</a></li>
           <li class="profile">
             <a href="#">Profile</a>
             <ul>

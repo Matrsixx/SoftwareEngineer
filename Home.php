@@ -20,7 +20,7 @@
           <li class="profile">
             <a href="#">Profile</a>
             <ul>
-              <li><a href="#">View Profile</a></li>
+              <li><a href="profile.php">View Profile</a></li>
               <li><a href="index.php">Logout</a></li>
             </ul>
           </li>

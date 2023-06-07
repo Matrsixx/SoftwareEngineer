@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dry-It | Dashboard</title>
+    <link rel="stylesheet" href="LaundryService.css">
+    <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090297730372472842/LogoSEcropped.png" type="image/x-icon">
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="https://cdn.discordapp.com/attachments/524461320314028052/1090298933110124737/logo2.png" alt="Dry-It Logo">
+      </div>
+      
+      <nav>
+        <ul>
+          <li><a href="Home.php">Home</a></li>
+          <li><a href="Transaction.php">Transaction</a></li>
+          <li class="profile">
+            <a href="#">Profile</a>
+            <ul>
+              <li><a href="profile.php">View Profile</a></li>
+              <li><a href="index.php">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="location">
+        <p>Lokasi Anda:</p>
+        <button class="btn-location" window.onload=function(){getLocation();} id="location"></button>
+
+        <script>
+        var x = document.getElementById("location");
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+
+        function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude + 
+          "<br>Longitude: " + position.coords.longitude;
+        }
+        </script>
+      </div>
+    </header>
+
+    <section class="search">
+        <div class="container">
+          <div class="laundry-info">
+            <img src="https://cdn.discordapp.com/attachments/1075754942071050372/1116021692582604880/image.png" alt="Laundry Image">
+            <div class="laundry-details">
+              <h4>Laundry A</h4>
+              <a>+62 812 3456 7890<br></a>
+              <a>Jalan U Raya, No. 3<br></a>
+              <a>4.75 / 5.00<br></a>
+              <a>Rewash guarantee</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+
+    <!-- Cari Laundry -->
+        
+      <section class="search">
+        <div class="container">
+          <div class="wash-type">
+            <h2>Regular Wash (2-3 days)</h2>
+            <div class="prices">
+              <div class="price">
+                <span>Laundry Pakaian Kiloan</span>
+                <span>Rp.5000:</span>
+                <div class="quantity">
+                  <button class="minus-btn">-</button>
+                  <input type="text" value="0" />
+                  <button class="plus-btn">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Pakaian Satuan</span>
+                <span>Rp.8000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Jas Satuan </span>
+                <span>Rp.10000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Seprai Satuan </span>
+                <span>Rp.10000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Selimut Satuan </span>
+                <span>Rp.10000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Bantal Satuan </span>
+                <span>Rp.15000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Boneka Satuan </span>
+                <span>Rp.15000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <!-- Add more price elements here -->
+            </div>
+          </div>
+          <div class="wash-type">
+            <h2>Express Wash (1 day)</h2>
+            <div class="prices">
+              <div class="price">
+                <span>Laundry Pakaian Kiloan</span>
+                <span>Rp.10000:</span>
+                <div class="quantity">
+                  <button class="minus-btn">-</button>
+                  <input type="text" value="0" />
+                  <button class="plus-btn">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Pakaian Satuan </span>
+                <span>Rp.16000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Jas Satuan </span>
+                <span>Rp.20000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Seprai Satuan </span>
+                <span>Rp.20000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Selimut Satuan </span>
+                <span>Rp.20000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <div class="price">
+                <span>Laundry Bantal Satuan </span>
+                <span>Rp.30000:</span>
+                <div class="quantity">
+                  <button class="minus">-</button>
+                  <input type="number" value="0" min="0">
+                  <button class="plus">+</button>
+                </div>
+              </div>
+              <!-- Add more price elements here -->
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+      <div class="order-list">
+        <h2>Order List</h2>
+        <h4>Regular Wash:</h4>
+        <h4>Express Wash:</h4>
+        <ul class="items-list">
+          <!-- Selected items will be dynamically added here -->
+        </ul>
+      </div>
+  
+      <button id="confirm-btn">Confirm</button>
+      
+
+      <script>
+        const quantityBoxes = document.querySelectorAll(".quantity input");
+
+// Loop through each quantity box
+quantityBoxes.forEach((input) => {
+  const minusBtn = input.previousElementSibling;
+  const plusBtn = input.nextElementSibling;
+
+  // Add event listener to the minus button
+  minusBtn.addEventListener("click", () => {
+    decreaseQuantity(input);
+  });
+
+  // Add event listener to the plus button
+  plusBtn.addEventListener("click", () => {
+    increaseQuantity(input);
+  });
+});
+
+// Function to decrease the quantity
+function decreaseQuantity(input) {
+  let value = parseInt(input.value);
+
+  if (value > 0) {
+    value--;
+    input.value = value;
+  }
+}
+
+// Function to increase the quantity
+function increaseQuantity(input) {
+  let value = parseInt(input.value);
+  value++;
+  input.value = value;
+}
+      </script>
+
+  </body>
+</html>

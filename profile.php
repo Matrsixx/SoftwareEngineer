@@ -6,7 +6,7 @@
       session_start(); 
       ob_start();
 	?>
-	<title>Halaman Pembayaran</title>
+	<title>Dry-It! | Profile</title>
 	<link rel="stylesheet" type="text/css" href="profile.css">
   <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090665780112261120/LogoSEcropped.png" type="image/x-icon">
 </head>
@@ -31,9 +31,53 @@
     </nav>
     
     <div class="location">
-      <p>Lokasi Anda:</p>
-      <button class="btn-location">Jl. Sudirman No. 5</button>
-    </div>
+        <p>Lokasi Anda:</p>
+
+        <button class="btn-location" id="location"></button>
+      
+        <script>
+        var x = document.getElementById("location");
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        var lat = 0;
+        var lon = 0;
+
+        function showPosition(position) {
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+          var api = "1ecf70f59a484579831a92c9331e4e4e";
+          
+          var requestOptions = {
+            method: 'GET',
+          };
+
+          fetch("https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&apiKey=" + api, requestOptions)
+            .then(response => response.json())
+            .then((result) => {
+              var address = result.features[0].properties.street;
+              // x.innerHTML = lat + ',' + lon + "<br> " + address;
+              x.innerHTML = address;
+            })
+            .catch(error => {
+              console.log('error', error);
+              x.innerHTML = "Geolocation is not supported by this browser.";
+            });
+          
+        }
+
+        window.onload = function() {
+          getLocation();
+        };
+        </script>
+
+      </div>
   </header>
 
 	<main>
@@ -42,12 +86,12 @@
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Picture">
         <div class="profile-details">
           <h2><?php echo $_SESSION['username']; ?></h2>
-          <p>Change Profile Picture</p>
-          <p>Remove Profile Picture</p>
         </div>
         <div class="action-button">
-          <button type="submit">Edit Profile</button>
-          <button type="submit">Change Password</button>
+          <a href="UpdateProfile.php" style="text-decoration: none; color: inherit;">
+            <button type="submit">Update Profile</button>
+            <button type="submit">Change Password</button>
+          </a>
         </div>
       </div>
       <div class="profile-secondary-info">

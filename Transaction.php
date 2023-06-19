@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <title>Dry-It | Transaction</title>
     <link rel="stylesheet" href="Transaction.css">
     <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090297730372472842/LogoSEcropped.png" type="image/x-icon">
   </head>
-<body>
-
-  <!-- Header -->
-  <header>
+  <body>
+    <!-- Header -->
+    <header>
       <div class="logo">
         <img src="https://cdn.discordapp.com/attachments/524461320314028052/1090298933110124737/logo2.png" alt="Dry-It Logo">
       </div>
@@ -17,7 +16,7 @@
       <nav>
         <ul>
           <li><a href="Home.php">Home</a></li>
-          <li><a href="Transaction.php">Transaction</a></li>
+          <li><a href="./Transaction.php">Transaction</a></li>
           <li class="profile">
             <a href="#">Profile</a>
             <ul>
@@ -30,24 +29,51 @@
       
       <div class="location">
         <p>Lokasi Anda:</p>
-        <button class="btn-location" window.onload=function(){getLocation();} id="location"></button>
 
+        <button class="btn-location" id="location"></button>
+      
         <script>
-          var x = document.getElementById("location");
+        var x = document.getElementById("location");
 
-          function getLocation() {
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        var lat = 0;
+        var lon = 0;
+
+        function showPosition(position) {
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+          var api = "1ecf70f59a484579831a92c9331e4e4e";
+          
+          var requestOptions = {
+            method: 'GET',
+          };
+
+          fetch("https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&apiKey=" + api, requestOptions)
+            .then(response => response.json())
+            .then((result) => {
+              var address = result.features[0].properties.street;
+              // x.innerHTML = lat + ',' + lon + "<br> " + address;
+              x.innerHTML = address;
+            })
+            .catch(error => {
+              console.log('error', error);
               x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-          }
+            });
+          
+        }
 
-          function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude + 
-            "<br>Longitude: " + position.coords.longitude;
-          }
+        window.onload = function() {
+          getLocation();
+        };
         </script>
+
       </div>
     </header>
 

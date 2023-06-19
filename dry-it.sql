@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 07:33 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jun 19, 2023 at 09:09 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `laundryservices`
+--
+
+CREATE TABLE `laundryservices` (
+  `serviceID` int(11) NOT NULL,
+  `serviceName` varchar(50) NOT NULL,
+  `servicePrice` int(11) NOT NULL,
+  `serviceCategory` tinyint(1) NOT NULL,
+  `tenantID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `laundryservices`
+--
+
+INSERT INTO `laundryservices` (`serviceID`, `serviceName`, `servicePrice`, `serviceCategory`, `tenantID`) VALUES
+(1, 'Laundry Kiloan', 6000, 0, 1),
+(2, 'Laundry Satuan', 10000, 0, 1),
+(3, 'Laundry GECE!', 15000, 1, 1),
+(4, 'Laundry Super!', 20000, 1, 1),
+(5, ':aundry WOI!', 4000, 0, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tenant`
 --
 
@@ -33,7 +58,7 @@ CREATE TABLE `tenant` (
   `address` text NOT NULL,
   `Photo` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tenant`
@@ -59,7 +84,7 @@ CREATE TABLE `transactionheader` (
   `TransactionProgress` tinyint(1) NOT NULL,
   `UsersId` int(11) NOT NULL,
   `TenantId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transactionheader`
@@ -81,20 +106,28 @@ CREATE TABLE `users` (
   `id` int(3) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `email` varchar(255) NOT NULL,
+  `address` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
-(7, 'admin', '$2y$10$iusesomecrazystrings2u0s.7Uu7dRDQyLygbeI6Nisg4CfKtRlq', 'admin@gmail.com'),
-(8, 'felix', '$2y$10$iusesomecrazystrings2uhB91MlWpGIP6pNsNYciRE5VvNMZtBaa', 'felix@gmail.com');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `address`) VALUES
+(7, 'admin', '$2y$10$iusesomecrazystrings2u0s.7Uu7dRDQyLygbeI6Nisg4CfKtRlq', 'admin@gmail.com', 'Admin Address'),
+(8, 'felix', '$2y$10$iusesomecrazystrings2uhB91MlWpGIP6pNsNYciRE5VvNMZtBaa', 'felix@gmail.com', 'Sentul City');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `laundryservices`
+--
+ALTER TABLE `laundryservices`
+  ADD PRIMARY KEY (`serviceID`),
+  ADD KEY `foreign_key` (`tenantID`);
 
 --
 -- Indexes for table `tenant`
@@ -121,6 +154,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `laundryservices`
+--
+ALTER TABLE `laundryservices`
+  MODIFY `serviceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
@@ -141,6 +180,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `laundryservices`
+--
+ALTER TABLE `laundryservices`
+  ADD CONSTRAINT `laundryservices_ibfk_1` FOREIGN KEY (`tenantID`) REFERENCES `tenant` (`id`);
 
 --
 -- Constraints for table `transactionheader`

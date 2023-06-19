@@ -47,9 +47,6 @@
         var lon = 0;
 
         function showPosition(position) {
-          
-          clearTimeout(setTimeout("geolocFail()", 10000));
-
           lat = position.coords.latitude;
           lon = position.coords.longitude;
           var api = "1ecf70f59a484579831a92c9331e4e4e";
@@ -57,21 +54,13 @@
           var requestOptions = {
             method: 'GET',
           };
-          
+
           fetch("https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&apiKey=" + api, requestOptions)
             .then(response => response.json())
             .then((result) => {
-              var type = result.features[0].properties.result_type;
-              var name = result.features[0].properties.name;
-              var street = result.features[0].properties.street;
+              var address = result.features[0].properties.street;
               // x.innerHTML = lat + ',' + lon + "<br> " + address;
-              console.log(lat + ',' + lon);
-              if (name == street || name == null) {
-                x.innerHTML = street;
-              } else {
-                x.innerHTML = name + "<br>" + street;
-              }
-              
+              x.innerHTML = address;
             })
             .catch(error => {
               console.log('error', error);
@@ -123,13 +112,14 @@
             $select_all_query = mysqli_query($connection, $query);
 
             while($row = mysqli_fetch_assoc($select_all_query)){
+              $tenant_id = $row['id'];
               $tenant_name = $row['name'];
               $tenant_address = $row['address'];
               $tenant_photo = $row['Photo'];
               $tenant_phone = $row['phone'];
           ?>
           <div class="laundry">
-            <a href="LaundryService.php?name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">
+            <a href="LaundryService.php?id=<?php echo urlencode($tenant_id) ?>&name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">
               <img src="<?php echo $tenant_photo ?>" alt="Laundry Image">
               <h3><?php echo $tenant_name ?></h3>
               <p><?php echo $tenant_address ?></p>

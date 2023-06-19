@@ -1,4 +1,4 @@
-Style untuk seluruh halaman
+/* Style untuk seluruh halaman */
 body {
     margin: 0;
     font-family: sans-serif;
@@ -19,14 +19,7 @@ body {
     z-index: 1;
   }
 
-  nav {
-    background-color: gray;
-    height: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
+
   nav ul {
     list-style-type: none;
     margin: 0;
@@ -71,12 +64,6 @@ body {
     padding: 10px 20px;
   }
   
-  
-  /* Style untuk logo */
-  .logo {
-    display: flex;
-    align-items: center;
-  }
   
   .logo img {
     height: 50px;
@@ -129,9 +116,7 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 5px; 
-      border: 1px solid black;
-      /* Add margin between each price and quantity box */
+      margin-bottom: 5px; /* Add margin between each price and quantity box */
     }
 
     .container .price .quantity {
@@ -173,9 +158,16 @@ body {
       }
       
       /* Styles for the price elements and quantity box */
+      .prices {
+        margin-top: 10px;
+      }
       
-      
-
+      .price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px; /* Add margin between each price and quantity box */
+      }
       
       .price .quantity {
         display: flex;
@@ -205,10 +197,26 @@ body {
         font-weight: bold;
       }
   
+  /* atur laundry biar horizontal */
 
+  .laundry-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .laundry-info img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
   .order-list {
     margin-top: 20px;
-    text-align: center;
+    text-align: left;
+    margin-left: 359px;
   }
   
   .order-list h2 {
@@ -216,21 +224,11 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
   }
-  
-  .items-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-  }
-  
-  .items-list li {
-    margin-bottom: 5px;
-  }
-  
+
   #confirm-btn {
+    text-align: left;
     display: block;
-    margin: 20px auto;
+    margin-left: 359px;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -244,4 +242,43 @@ body {
   #confirm-btn:hover {
     background-color: #555;
   }
-  
+
+  .price-laundry {
+    margin-right: 10px;
+  }
+  .price-laundry1 {
+    margin-right: 15px;
+  }
+  .price-laundry2 {
+    margin-right: -10px;
+  }
+  .price-laundry3 {
+    margin-right: 12px;
+  }
+  .price-laundry4 {
+    margin-right: 15px;
+  }
+  .price-laundry5 {
+    margin-right: 5px;
+  }
+  .price-laundry6 {
+    margin-right: 15px;
+  }
+  .price-laundry7 {
+    margin-right: 15px;
+  }
+  .price-laundry8 {
+    margin-right: 20px;
+  }
+  .price-laundry9 {
+    margin-right: -15px;
+  }
+  .price-laundry10 {
+    margin-right: 5px;
+  }
+  .price-laundry11 {
+    margin-right: 10px;
+  }
+  .price-laundry12 {
+    margin-right: 0px;
+  }

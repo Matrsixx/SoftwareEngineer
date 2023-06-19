@@ -19,7 +19,7 @@
     <nav>
       <ul>
         <li><a href="Home.php">Home</a></li>
-        <li><a href="#">Transaction</a></li>
+        <li><a href="Transaction.php">Transaction</a></li>
         <li class="profile">
           <a href="#">Profile</a>
           <ul>
@@ -57,7 +57,12 @@
         </div>
         <div class="profile-address">
           <h2>Address</h2>
-          <p>User's Address</p>
+          <p><?php 
+            $query = "SELECT address FROM users WHERE id = '".$_SESSION['id']."'";
+            $result = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($result);
+            echo $row['address'];
+          ?></p>
         </div>
       </div>
 		</section>

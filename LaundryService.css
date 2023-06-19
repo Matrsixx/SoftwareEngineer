@@ -1,4 +1,4 @@
-/* Style untuk seluruh halaman */
+Style untuk seluruh halaman
 body {
     margin: 0;
     font-family: sans-serif;
@@ -129,7 +129,9 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 5px; /* Add margin between each price and quantity box */
+      margin-bottom: 5px; 
+      border: 1px solid black;
+      /* Add margin between each price and quantity box */
     }
 
     .container .price .quantity {
@@ -171,16 +173,9 @@ body {
       }
       
       /* Styles for the price elements and quantity box */
-      .prices {
-        margin-top: 10px;
-      }
       
-      .price {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 5px; /* Add margin between each price and quantity box */
-      }
+      
+
       
       .price .quantity {
         display: flex;
@@ -210,96 +205,6 @@ body {
         font-weight: bold;
       }
   
-  /* Style untuk section */
-  section {
-    padding: 20px;
-  }
-  
-  /* Style untuk search form */
-  .search form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-  }
-  
-  .search input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #ddd;
-    border-radius: 20px 0 0 20px;
-    width: 70%;
-  }
-  
-  .search button {
-    background-color: #333;
-    color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 0 20px 20px 0;
-    padding: 11.6px;
-    width: 20%;
-  }
-  
-  /* atur laundry biar horizontal */
-  .laundries {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .laundry {
-    display: inline-block; /* menampilkan elemen secara horizontal */
-    width: calc(25% - 50px); /* menentukan lebar elemen */
-    margin: 25px; /* memberi jarak antar elemen */
-    vertical-align: top; /* mengatur elemen ke posisi paling atas */
-  }
-
-  .laundry img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-
-  .laundry-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .laundry-info img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  
-  .laundry-details {
-    flex-grow: 1;
-  }
-  
-  .laundry-details h4 {
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .laundry-details a {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
-  }
-  
-  .laundry-details a:last-child {
-    margin-bottom: 0;
-  }
-  
-  .laundry-details a:hover {
-    text-decoration: underline;
-  }
 
   .order-list {
     margin-top: 20px;
@@ -339,24 +244,4 @@ body {
   #confirm-btn:hover {
     background-color: #555;
   }
-
-  .price {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .price div {
-    flex-basis: calc(50% - 20px);
-  }
-  
-  .price a {
-    margin-bottom: 10px;
-  }
-  
-  .price span {
-    display: block;
-  }
-  
-  
   

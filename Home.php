@@ -58,9 +58,15 @@
           fetch("https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&apiKey=" + api, requestOptions)
             .then(response => response.json())
             .then((result) => {
-              var address = result.features[0].properties.street;
+              var name = result.features[0].properties.name;
+              var street = result.features[0].properties.street;
               // x.innerHTML = lat + ',' + lon + "<br> " + address;
-              x.innerHTML = address;
+              if (name == street) {
+                x.innerHTML = street;
+              } else {
+                x.innerHTML = name + "<br>" + street;
+              }
+              
             })
             .catch(error => {
               console.log('error', error);
@@ -115,6 +121,7 @@
               $tenant_name = $row['name'];
               $tenant_address = $row['address'];
               $tenant_photo = $row['Photo'];
+              $tenant_phone = $row['phone'];
           ?>
           <div class="laundry">
             <a href="LaundryService.php?name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">

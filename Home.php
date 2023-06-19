@@ -50,13 +50,26 @@
       </div>
     </header>
 
+    <?php
+      $search = '%';
+      include "Includes/db.php";
+    ?>
+        
     <!-- Cari Laundry -->
     <section class="search">
       <div class="container">
         <h2>Cari Laundry</h2>
-        <form>
-          <input type="text" placeholder="Masukkan nama laundry">
+        <form action = "Home.php" method="GET">
+          <input type="text" id="name" name="name" placeholder="Masukkan nama laundry">
           <button>Cari</button>
+
+          <?php
+            if (isset($_GET['name'])) {
+              $name = $_GET['name'];
+              $search = '%' . $name . '%';
+            }
+          ?>
+
         </form>
       </div>
     </section>
@@ -67,8 +80,7 @@
         <h2>Laundry Terdekat</h2>
         <div class="laundries">
           <?php
-            include "Includes/db.php";
-            $query = "SELECT * FROM tenant";
+            $query = "SELECT * FROM tenant WHERE name LIKE '$search'";
 
             $select_all_query = mysqli_query($connection, $query);
 
@@ -78,9 +90,11 @@
               $tenant_photo = $row['Photo'];
           ?>
           <div class="laundry">
-            <img src="<?php echo $tenant_photo ?>" alt="Laundry 1">
-            <h3><?php echo $tenant_name ?></h3>
-            <p><?php echo $tenant_address ?></p>
+            <a href="LaundryService.php?name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">
+              <img src="<?php echo $tenant_photo ?>" alt="Laundry Image">
+              <h3><?php echo $tenant_name ?></h3>
+              <p><?php echo $tenant_address ?></p>
+            </a>
           </div>
 
           <?php } ?>

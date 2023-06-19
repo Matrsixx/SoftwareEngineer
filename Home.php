@@ -29,8 +29,9 @@
       
       <div class="location">
         <p>Lokasi Anda:</p>
-        <button class="btn-location" window.onload=function(){getLocation();} id="location"></button>
 
+        <button class="btn-location" id="location"></button>
+      
         <script>
         var x = document.getElementById("location");
 
@@ -41,12 +42,38 @@
             x.innerHTML = "Geolocation is not supported by this browser.";
           }
         }
+        
+        var lat = 0;
+        var lon = 0;
 
         function showPosition(position) {
-          x.innerHTML = "Latitude: " + position.coords.latitude + 
-          "<br>Longitude: " + position.coords.longitude;
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+          var api = "1ecf70f59a484579831a92c9331e4e4e";
+          
+          var requestOptions = {
+            method: 'GET',
+          };
+
+          fetch("https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&apiKey=" + api, requestOptions)
+            .then(response => response.json())
+            .then((result) => {
+              var address = result.features[0].properties.street;
+              // x.innerHTML = lat + ',' + lon + "<br> " + address;
+              x.innerHTML = address;
+            })
+            .catch(error => {
+              console.log('error', error);
+              x.innerHTML = "Geolocation is not supported by this browser.";
+            });
+          
         }
+
+        window.onload = function() {
+          getLocation();
+        };
         </script>
+
       </div>
     </header>
 

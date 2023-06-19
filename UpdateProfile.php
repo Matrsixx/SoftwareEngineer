@@ -23,8 +23,6 @@
           $username = $_SESSION['username'];
 
           if(isset($_POST['submit'])){
-            $message = "KONTOL";
-            
             $email = $_POST['email'];
             $password = $_POST['password'];
             $name = $_POST['name'];
@@ -39,7 +37,6 @@
             $data1_username = '';
             $data1_password = '';
             $data1_address = ' ';
-            $data1_email = ' ';
 
 					  $select_query = mysqli_query($connection, $query);
 					  while($row = mysqli_fetch_array($select_query)){
@@ -53,14 +50,14 @@
             if($username == $data1_username && $password == $data1_password ){
               $query = "UPDATE users SET username = '$name', email = '$email' WHERE username = '$username'";
               $search_query = mysqli_query($connection, $query);
-              $message = "Update Success!";
             }else{
-              $message = "Wrong username or password";
+              $error123 = "Wrong username or password";
             }
           }
           
         ?>
         
+        <p><?php echo $username; ?></p>
         <p><?php echo $message; ?></p>
         <label for="name">Username:</label>
         <input type="text" id="name" name="name"><br><br>
@@ -73,7 +70,7 @@
         <br>
       </form>
       
-      <a href="profile.php">Back to profile</a>
+      <a href="#">Back to login</a>
     </div>
     
 

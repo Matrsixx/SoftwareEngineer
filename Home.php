@@ -136,7 +136,7 @@
               $tenant_phone = $row['phone'];
           ?>
           <div class="laundry">
-            <a href="LaundryService.php?id=<?php echo urlencode($tenant_id) ?>&name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">
+            <a href="LaundryService.php?id=<?php echo base64_encode($tenant_id) ?>&name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">
               <img src="<?php echo $tenant_photo ?>" alt="Laundry Image">
               <h3><?php echo $tenant_name ?></h3>
               <p><?php echo $tenant_address ?></p>

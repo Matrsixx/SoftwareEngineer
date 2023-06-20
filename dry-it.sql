@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2023 at 09:09 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 20, 2023 at 11:11 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ INSERT INTO `laundryservices` (`serviceID`, `serviceName`, `servicePrice`, `serv
 (2, 'Laundry Satuan', 10000, 0, 1),
 (3, 'Laundry GECE!', 15000, 1, 1),
 (4, 'Laundry Super!', 20000, 1, 1),
-(5, ':aundry WOI!', 4000, 0, 2);
+(5, 'Laundry WOI!', 4000, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -74,12 +74,36 @@ INSERT INTO `tenant` (`id`, `name`, `address`, `Photo`, `phone`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactiondetail`
+--
+
+CREATE TABLE `transactiondetail` (
+  `transactiondetailid` int(11) NOT NULL,
+  `transactionid` int(11) NOT NULL,
+  `tenantid` int(11) NOT NULL,
+  `serviceid` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transactiondetail`
+--
+
+INSERT INTO `transactiondetail` (`transactiondetailid`, `transactionid`, `tenantid`, `serviceid`, `quantity`) VALUES
+(1, 23, 1, 1, 2),
+(2, 24, 1, 1, 2),
+(3, 24, 1, 2, 1),
+(4, 24, 1, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transactionheader`
 --
 
 CREATE TABLE `transactionheader` (
   `TransactionId` int(11) NOT NULL,
-  `TransactionDate` date NOT NULL,
+  `TransactionDate` datetime NOT NULL,
   `TransactionPrice` bigint(20) NOT NULL,
   `TransactionProgress` tinyint(1) NOT NULL,
   `UsersId` int(11) NOT NULL,
@@ -91,10 +115,15 @@ CREATE TABLE `transactionheader` (
 --
 
 INSERT INTO `transactionheader` (`TransactionId`, `TransactionDate`, `TransactionPrice`, `TransactionProgress`, `UsersId`, `TenantId`) VALUES
-(1, '2023-06-07', 50000, 0, 8, 2),
-(2, '2023-06-05', 20000, 0, 8, 4),
-(4, '2023-06-01', 100000, 1, 8, 3),
-(5, '2023-06-01', 100000, 0, 8, 3);
+(1, '2023-06-07 00:00:00', 50000, 0, 8, 2),
+(2, '2023-06-05 00:00:00', 20000, 0, 8, 4),
+(4, '2023-06-01 00:00:00', 100000, 1, 8, 3),
+(5, '2023-06-01 00:00:00', 100000, 0, 8, 3),
+(20, '2023-06-20 06:00:13', 74000, 0, 8, 1),
+(21, '2023-06-20 06:00:38', 74000, 0, 8, 1),
+(22, '2023-06-20 06:00:51', 74000, 0, 8, 1),
+(23, '2023-06-20 06:01:46', 74000, 0, 8, 1),
+(24, '2023-06-20 06:04:38', 74000, 0, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -115,8 +144,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `address`) VALUES
-(7, 'admin', '$2y$10$iusesomecrazystrings2u0s.7Uu7dRDQyLygbeI6Nisg4CfKtRlq', 'admin@gmail.com', 'Admin Address'),
-(8, 'felix', '$2y$10$iusesomecrazystrings2uhB91MlWpGIP6pNsNYciRE5VvNMZtBaa', 'felix@gmail.com', 'Sentul City');
+(7, 'admin', '$2y$10$iusesomecrazystrings2u0s.7Uu7dRDQyLygbeI6Nisg4CfKtRlq', 'admin@gmail.com', 'Jalan Rahasia'),
+(8, 'felix', '$2y$10$iusesomecrazystrings2uhB91MlWpGIP6pNsNYciRE5VvNMZtBaa', 'felix@gmail.com', 'Jalan Binus'),
+(9, 'asepp', '$2y$10$iusesomecrazystrings2uzMvdNBmQwUd9DW3i8ZxUUzhw.C8PQhW', 'asep@gmail.com', 'Jalan Tomang');
 
 --
 -- Indexes for dumped tables
@@ -134,6 +164,14 @@ ALTER TABLE `laundryservices`
 --
 ALTER TABLE `tenant`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transactiondetail`
+--
+ALTER TABLE `transactiondetail`
+  ADD PRIMARY KEY (`transactiondetailid`),
+  ADD KEY `tenantid` (`tenantid`),
+  ADD KEY `serviceid` (`serviceid`);
 
 --
 -- Indexes for table `transactionheader`
@@ -154,38 +192,39 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `laundryservices`
---
-ALTER TABLE `laundryservices`
-  MODIFY `serviceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `transactiondetail`
+--
+ALTER TABLE `transactiondetail`
+  MODIFY `transactiondetailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `transactionheader`
 --
 ALTER TABLE `transactionheader`
-  MODIFY `TransactionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `TransactionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `laundryservices`
+-- Constraints for table `transactiondetail`
 --
-ALTER TABLE `laundryservices`
-  ADD CONSTRAINT `laundryservices_ibfk_1` FOREIGN KEY (`tenantID`) REFERENCES `tenant` (`id`);
+ALTER TABLE `transactiondetail`
+  ADD CONSTRAINT `transactiondetail_ibfk_1` FOREIGN KEY (`tenantid`) REFERENCES `tenant` (`id`),
+  ADD CONSTRAINT `transactiondetail_ibfk_2` FOREIGN KEY (`serviceid`) REFERENCES `laundryservices` (`serviceID`);
 
 --
 -- Constraints for table `transactionheader`

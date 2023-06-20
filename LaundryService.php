@@ -37,14 +37,7 @@
 
         function getLocation() {
           if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, errorCallback => {
-              console.log(errorCallback);
-              x.innerHTML = "Please allow location access";
-            }, {
-              enableHighAccuracy: true,
-              timeout: 5000,
-              maximumAge: 0
-            });
+            navigator.geolocation.getCurrentPosition(showPosition);
           } else { 
             x.innerHTML = "Geolocation is not supported by this browser.";
           }
@@ -54,8 +47,6 @@
         var lon = 0;
 
         function showPosition(position) {
-          clearTimeout(setTimeout("geolocFail()", 10000));
-
           lat = position.coords.latitude;
           lon = position.coords.longitude;
           var api = "1ecf70f59a484579831a92c9331e4e4e";
@@ -63,21 +54,13 @@
           var requestOptions = {
             method: 'GET',
           };
-          
+
           fetch("https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&apiKey=" + api, requestOptions)
             .then(response => response.json())
             .then((result) => {
-              var type = result.features[0].properties.result_type;
-              var name = result.features[0].properties.name;
-              var street = result.features[0].properties.street;
+              var address = result.features[0].properties.street;
               // x.innerHTML = lat + ',' + lon + "<br> " + address;
-              console.log(lat + ',' + lon);
-              if (name == street || name == null) {
-                x.innerHTML = street;
-              } else {
-                x.innerHTML = name + "<br>" + street;
-              }
-              
+              x.innerHTML = address;
             })
             .catch(error => {
               console.log('error', error);
@@ -90,6 +73,7 @@
           getLocation();
         };
         </script>
+
       </div>
     </header>
 
@@ -123,7 +107,7 @@
             <div class="prices">
               <?php
                     include "Includes/db.php";
-                    $tenant_id = $_GET['id'];
+                    $tenant_id = base64_decode($_GET['id']);
 
                     $query = "SELECT * FROM laundryservices ls JOIN tenant t ON ls.tenantID = t.id WHERE ls.tenantID = $tenant_id AND ls.serviceCategory = 0";
 
@@ -153,7 +137,7 @@
             <div class="prices">
               <?php
                     include "Includes/db.php";
-                    $tenant_id = $_GET['id'];
+                    $tenant_id = base64_decode($_GET['id']);
 
                     $query = "SELECT * FROM laundryservices ls JOIN tenant t ON ls.tenantID = t.id WHERE ls.tenantID = $tenant_id AND ls.serviceCategory = 1";
 
@@ -227,9 +211,14 @@
             });
           });
 
+          var url = '';
+          
           // Update order list
           function updateOrderList() {
             itemsList.innerHTML = ''; // Clear previous items
+
+            //array to store data
+            let orderList = [];
 
             // Get all quantity inputs
             const quantityInputs = document.querySelectorAll('.quantity input');
@@ -245,12 +234,20 @@
                 listItem.innerText = serviceName + ' : ' + quantityValue;
                 listItem.style.marginBottom = '10px'; // Add margin to the list item
                 itemsList.appendChild(listItem);
+
+                orderList.push(serviceName + ':' + quantityValue);
               }
             });
+
+            let orderListString = orderList.join(',');
+            url = "Confirm.php?id=<?php echo base64_encode($tenant_id); ?>&name=<?php echo urlencode($tenant_name); ?>&address=<?php echo urlencode($tenant_address); ?>&photo=<?php echo urlencode($tenant_photo); ?>&phone=<?php echo urlencode($tenant_phone) ?>&orderlist=" + encodeURIComponent(orderListString);
+            confirmBtn.setAttribute('href', url);
           }
 
           // Event listener for confirm button
           confirmBtn.addEventListener('click', function() {
+            // window.location.href = "Confirm.php?id=<?php echo base64_encode($tenant_id); ?>&name=<?php echo urlencode($tenant_name); ?>&address=<?php echo urlencode($tenant_address); ?>&photo=<?php echo urlencode($tenant_photo); ?>&phone=<?php echo urlencode($tenant_phone) ?>";
+            window.location.href = url;
           });
         });
       </script>

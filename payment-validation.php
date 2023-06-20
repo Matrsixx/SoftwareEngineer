@@ -29,7 +29,7 @@
 	<main>
       <div class="container">
             <h1>Total Pembayaran</h1>
-            <div class="total">Rp 25.000</div>
+            <div class="total">Rp. <?php echo $_GET["price"]?></div>
               <h2>Masukkan Kode Promo</h2>
               <form>
                 <input type="text" placeholder="Masukkan kode promo">
